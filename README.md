@@ -9,20 +9,17 @@ The instance index for WoW: Forever: every dungeon and raid the client knows, it
 <a href="https://ko-fi.com/cjber59408"><img src="https://img.shields.io/badge/Ko--fi-tip-ff5e5b?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
 </p>
 
-Atlas Forever is being built as the suite's map surface: one window that lists the dungeons and raids the client knows, opens their floors, and keeps the places you name as bookmarks that set the game's own waypoint.
+Atlas Forever opens an instance browser with a searchable list, a map view, floor choices when the client provides them, and account-wide bookmarks. The waypoint control appears when entrance coordinates are available.
 
-It is not playable yet. This repository currently carries the instance index, the saved bookmark state and the API other Forever addons read; the window, the client map reading and the waypoint button are still to come, so there is nothing to open in game.
+<p align="center"><img src="docs/screenshots/window.png" alt="Atlas Forever instance browser mock" width="800"></p>
 
-## Screenshots
-
-There are no UI mocks yet because Atlas Forever has no player-facing window to render. Add a screenshot when the window ships.
+The mock uses Blizzard's window art, font and instance names. This client build has no instance map art in its `UiMap` data, so the empty map area is shown plainly.
 
 ## What is here
 
-- **The instance index.** Filter and find entries by continent, map type, level range and a name. A level range is shown only when the client reports it, so a missing upper bound reads as `38+` rather than an invented number.
-- **Bookmark state.** Bookmarks are saved per account as plain data, with the most recently viewed places remembered separately.
-- **An API for other Forever addons.** `AtlasForever.API` (version 1.1) answers a filtered instance list, one instance by map ID, and asks the window to open one. Until the saved state has loaded it answers `nil`, so a caller asks again after login instead of reading silence as "no instances".
-- **Error capture.** Every callback runs through `Core/SafeCall.lua`, so one bad entry cannot take the addon down.
+- **The instance browser.** Search the client-reported list, open an instance and choose a floor when it has more than one map.
+- **Bookmarks and waypoints.** Save favourite instances per account. Set a waypoint when the client data includes an entrance and the map accepts one.
+- **An API for other Forever addons.** `AtlasForever.API` (version 1.1) returns a filtered instance list, an entry by map ID, and opens an entry in the window.
 
 ## Install
 
@@ -34,7 +31,7 @@ The addon targets the WoW: Forever client, Interface 16001, and needs nothing el
 
 | Command | What it does |
 |---|---|
-| `/atlas`, `/atlasforever` | Print the bookmark state |
+| `/atlas`, `/atlasforever` | Open the instance browser |
 
 ## What it never does
 
@@ -58,10 +55,11 @@ Each one works on its own, and they work together when you install more than one
 
 ## Development
 
-Specs run on LuaJIT against a mock client (`tests/wow_mock.lua`), so they need no game client:
+Specs run on LuaJIT against a mock client (`tests/wow_mock.lua`), so they need no game client. Render the README mock with the shared renderer:
 
 ```sh
 for spec in tests/*_spec.lua; do luajit "$spec" || exit 1; done
+python3 tools/screenshots.py
 ```
 
 `Core/Model.lua` is pure and its specs carry no client at all. [AGENTS.md](AGENTS.md) has the full gate, the layout and the rules this repository is held to.
