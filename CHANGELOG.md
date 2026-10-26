@@ -11,6 +11,8 @@ All notable changes to Atlas Forever are documented here. The format is based on
 
 ### Added
 
+- **A map marker icon now identifies Atlas Forever in the client and its README.** The icon follows the family template and has rendered 400 px and 64 px files.
+- Shared quality tooling, a pinned Sift profile, type checking, secret and locale checks, plus shared-core drift CI.
 - `.editorconfig`, the family template every other Forever addon already carried.
 
 ### Added

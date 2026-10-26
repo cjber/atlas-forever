@@ -1,0 +1,9 @@
+-- Every phrase Atlas Forever shows, with its English text. Locale files use this template.
+local _, ns = ...
+if GetLocale() ~= "enUS" then
+	return
+end
+local L = ns.L
+L["%s: %d bookmarks"] = "%s: %d bookmarks"
+L["%s: bookmarks are not loaded yet"] = "%s: bookmarks are not loaded yet"
+L["Atlas Forever"] = "Atlas Forever"
