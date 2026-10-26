@@ -357,6 +357,10 @@ function methods:SetTexture(texture)
 	self._texture = texture
 end
 
+function methods:SetColorTexture(r, g, b, a)
+	self._colorTexture = { r, g, b, a }
+end
+
 function methods.SetTexCoord() end
 
 function methods:SetDesaturated(value)
@@ -420,6 +424,10 @@ setmetatable(methods, {
 ---@return Frame
 function Mock.CreateFrame(kind, name, parent, template)
 	local frame = NewRegion(kind, name, parent, template)
+	if template == "PortraitFrameTemplate" then
+		frame.TitleText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+		frame.portrait = frame:CreateTexture(nil, "ARTWORK")
+	end
 	Mock.frames[#Mock.frames + 1] = frame
 	if name then
 		Mock.named[name] = frame
@@ -548,6 +556,30 @@ function Mock.Harness(opts)
 		CreateColor = function(r, g, b, a)
 			return { r = r, g = g, b = b, a = a }
 		end,
+		UIDropDownMenu_CreateInfo = function()
+			return {}
+		end,
+		UIDropDownMenu_SetWidth = function(dropdown, width)
+			dropdown._menuWidth = width
+		end,
+		UIDropDownMenu_SetSelectedValue = function(dropdown, value)
+			dropdown._selectedValue = value
+		end,
+		UIDropDownMenu_AddButton = function(info, level)
+			Mock.dropdownButtons = Mock.dropdownButtons or {}
+			Mock.dropdownButtons[#Mock.dropdownButtons + 1] = { info = info, level = level }
+		end,
+		UIDropDownMenu_Initialize = function(dropdown, initialize)
+			dropdown._initialize = initialize
+		end,
+		C_Map = {
+			GetMapInfo = function()
+				return nil
+			end,
+			GetMapChildrenInfo = function()
+				return {}
+			end,
+		},
 		geterrorhandler = function()
 			return function() end
 		end,

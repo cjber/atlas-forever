@@ -36,6 +36,7 @@ local function makeWindow()
 		return ns.Window
 	end
 	local window = CreateFrame("Frame", "AtlasForeverWindow", UIParent, "PortraitFrameTemplate")
+	window.Selected = false
 	window:SetSize(WINDOW_WIDTH, WINDOW_HEIGHT)
 	window:SetPoint("CENTER")
 	window:SetMovable(true)
@@ -65,9 +66,16 @@ local function makeWindow()
 	content:SetSize(250, 1)
 	list:SetScrollChild(content)
 	window.ListContent = content
+	content.rows = {}
 	local noResults = text(content, "GameFontDisableSmall", "No matching instances.")
 	noResults:SetPoint("TOPLEFT", 4, 0)
 	window.NoResults = noResults
+	local divider = window:CreateTexture(nil, "BORDER")
+	divider:SetColorTexture(0, 0, 0, 0.55)
+	divider:SetPoint("TOPLEFT", list, "TOPRIGHT", 9, 0)
+	divider:SetPoint("BOTTOMLEFT", list, "BOTTOMRIGHT", 9, 0)
+	divider:SetWidth(1)
+	window.Divider = divider
 
 	local mapTitle = text(window, "GameFontNormalLarge", "Choose an instance")
 	mapTitle:SetPoint("TOPLEFT", list, "TOPRIGHT", 28, -2)
@@ -80,6 +88,11 @@ local function makeWindow()
 	map:SetPoint("TOPLEFT", breadcrumb, "BOTTOMLEFT", 0, -12)
 	map:SetSize(570, 365)
 	window.Map = map
+	local mapBacking = map:CreateTexture(nil, "BACKGROUND")
+	mapBacking:SetColorTexture(0.025, 0.035, 0.05, 0.82)
+	mapBacking:SetPoint("TOPLEFT", -4, 4)
+	mapBacking:SetPoint("BOTTOMRIGHT", 4, -4)
+	window.MapBacking = mapBacking
 
 	local floor = CreateFrame("Frame", nil, window, "UIDropDownMenuTemplate")
 	floor:SetPoint("TOPLEFT", map, "BOTTOMLEFT", -16, -2)
@@ -89,21 +102,29 @@ local function makeWindow()
 	coords:SetPoint("LEFT", floor, "RIGHT", 10, 2)
 	window.Coordinates = coords
 
-	local bookmark = CreateFrame("Button", nil, window, "UIPanelButtonTemplate")
+	local actionBar = CreateFrame("Frame", nil, window)
+	actionBar:SetSize(570, 44)
+	actionBar:SetPoint("BOTTOMRIGHT", -24, 20)
+	local actionBacking = actionBar:CreateTexture(nil, "BACKGROUND")
+	actionBacking:SetColorTexture(0.02, 0.025, 0.035, 0.9)
+	actionBacking:SetAllPoints()
+	window.ActionBar = actionBar
+	local bookmark = CreateFrame("Button", nil, actionBar, "UIPanelButtonTemplate")
 	bookmark:SetSize(155, 24)
-	bookmark:SetPoint("BOTTOMLEFT", map, "BOTTOMLEFT", 0, -54)
+	bookmark:SetPoint("RIGHT", actionBar, "RIGHT", -12, 0)
 	bookmark:SetText(L["Bookmark"])
 	bookmark:SetScript("OnClick", function()
 		if window.Selected then
 			toggleBookmark(window.Selected)
+			bookmark:SetText(isBookmarked(window.Selected.mapID) and L["Remove bookmark"] or L["Bookmark"])
 			window:RefreshList()
 		end
 	end)
 	window.Bookmark = bookmark
 
-	local waypoint = CreateFrame("Button", nil, window, "UIPanelButtonTemplate")
+	local waypoint = CreateFrame("Button", nil, actionBar, "UIPanelButtonTemplate")
 	waypoint:SetSize(155, 24)
-	waypoint:SetPoint("LEFT", bookmark, "RIGHT", 8, 0)
+	waypoint:SetPoint("RIGHT", bookmark, "LEFT", -8, 0)
 	waypoint:SetText(L["Set waypoint"])
 	waypoint:SetScript("OnClick", function()
 		local entry = window.Selected
@@ -174,12 +195,17 @@ local function makeWindow()
 				row:SetSize(244, ROW_HEIGHT)
 				row.Label = row:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
 				row.Label:SetPoint("LEFT", 6, 0)
+				row.SelectedHighlight = row:CreateTexture(nil, "BACKGROUND")
+				row.SelectedHighlight:SetColorTexture(0.12, 0.38, 0.62, 0.48)
+				row.SelectedHighlight:SetPoint("TOPLEFT", 0, -1)
+				row.SelectedHighlight:SetPoint("BOTTOMRIGHT", 0, 1)
 				row:SetScript("OnClick", function(button)
 					window:Select(button.entry)
 				end)
 				self.ListContent.rows[index] = row
 			end
 			row.entry = entry
+			row.SelectedHighlight:SetShown(self.Selected and self.Selected.mapID == entry.mapID or false)
 			row:SetPoint("TOPLEFT", 0, -(index - 1) * ROW_HEIGHT)
 			local range = ns.Model.LevelRange(entry)
 			row.Label:SetText(
