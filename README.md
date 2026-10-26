@@ -13,6 +13,10 @@ Atlas Forever is being built as the suite's map surface: one window that lists t
 
 It is not playable yet. This repository currently carries the instance index, the saved bookmark state and the API other Forever addons read; the window, the client map reading and the waypoint button are still to come, so there is nothing to open in game.
 
+## Screenshots
+
+There are no UI mocks yet because Atlas Forever has no player-facing window to render. Add a screenshot when the window ships.
+
 ## What is here
 
 - **The instance index.** Filter and find entries by continent, map type, level range and a name. A level range is shown only when the client reports it, so a missing upper bound reads as `38+` rather than an invented number.
