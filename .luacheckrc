@@ -18,6 +18,7 @@ globals = {
 }
 read_globals = {
 	"C_Map",
+	"C_SuperTrack",
 	"C_Timer",
 	"CreateColor",
 	"CreateFrame",
@@ -34,9 +35,16 @@ read_globals = {
 	"geterrorhandler",
 	"InterfaceOptions_AddCategory",
 	"InCombatLockdown",
+	"Enum",
 	"Settings",
 	"UIParent",
 	"UISpecialFrames",
+	"UiMapPoint",
+	"UIDropDownMenu_AddButton",
+	"UIDropDownMenu_CreateInfo",
+	"UIDropDownMenu_Initialize",
+	"UIDropDownMenu_SetSelectedValue",
+	"UIDropDownMenu_SetWidth",
 	"UnitPosition",
 	"time",
 }

@@ -16,3 +16,4 @@ Core\Model.lua
 Core\Core.lua
 Core\API.lua
 UI\SettingsPage.lua
+UI\Window.lua

@@ -5,6 +5,11 @@ All notable changes to Atlas Forever are documented here. The format is based on
 
 ## [Unreleased]
 
+### Added
+
+- **An instance browser window with search, bookmarks, floor selection and map coordinates where available**, so players can browse the client’s instance list in one place.
+- **A native-style README mock screenshot**, rendered from the shared Forever Core UI renderer and pinned client data.
+
 ### Changed
 
 - **The settings-page chrome is now Forever Core's shared `UI/SettingsPage.lua`**, vendored byte for byte and listed in the TOC. Atlas registers no settings page yet, so nothing calls it before one is built.
