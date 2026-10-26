@@ -4,12 +4,14 @@ Atlas Forever targets the WoW: Forever client (Interface 16001). It is the suite
 every map the client has, a live coordinate readout, and bookmarks that set the game's own waypoint. It never routes,
 never chooses what to do, never owns another addon's pins, and never touches protected functions.
 
-Read `forever-handoff/boundaries.md` in [cjber/skills](https://github.com/cjber/skills) before adding a feature: it
-says which addon owns what, and this file only says how to write code here.
+Read `docs/curseforge.md` for the current product scope and follow the WFA standards pack.
 
 ## Commands
 
 ```sh
+python3 .sift/gate.py --base origin/main
+python3 .sift/agents.py check
+tools/typecheck.sh
 stylua --check .
 luacheck .
 for spec in tests/*_spec.lua; do luajit "$spec" || exit 1; done
@@ -33,8 +35,7 @@ hand-delivered events. `tools/` holds development tooling, which `.pkgmeta` keep
   go through `Core/SafeCall.lua` so one bad row cannot take the addon down.
 - `Core/API.lua` is the versioned addon-to-addon contract, read as `AtlasForever.API`. It answers `nil` until saved
   state exists: a caller asks again after `PLAYER_LOGIN` instead of reading silence as "nothing here".
-- `UI/` holds the window and its views. `UI/Art.lua` owns frame helpers and the palette; the other files own one view
-  each.
+- Atlas currently has no user-interface files; add a real map window before adding UI-dependent settings or screenshots.
 
 ## Scope
 
@@ -45,6 +46,10 @@ Never: route or order travel, estimate flight, boat, zeppelin or portal time (`s
 or judge eligibility (`adventure-guide-forever`), own pins for a place type another addon registers (`forever-core`
 marker contract), shade exploration or track completion (`legacy-forever`), or show loot and boss tables
 (`adventure-guide-forever` owns AtlasLoot lookups).
+
+## Standards
+
+- `wow-forever-addon` — https://github.com/cjber/forever-core/tree/3fd1b7fe109e709c4952bb04622e94d05636585e/.agents/skills/wow-forever-addon (shared UI, icon, docs, CI and release requirements)
 
 ## Rules
 

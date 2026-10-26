@@ -1,3 +1,5 @@
+<p align="center"><img src="media/icon-400.png" width="96" alt="Atlas Forever icon"></p>
+
 <h1 align="center">Atlas Forever</h1>
 
 <p align="center">
