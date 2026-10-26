@@ -7,6 +7,8 @@ All notable changes to Atlas Forever are documented here. The format is based on
 
 ### Changed
 
+- **The settings-page chrome is now Forever Core's shared `UI/SettingsPage.lua`**, vendored byte for byte and listed in the TOC. Atlas registers no settings page yet, so nothing calls it before one is built.
+
 - The README and the new `docs/curseforge.md` follow the suite's shape: the family block, CI and release badges, what the addon never does, and the credits and licence sections every Forever addon carries. They also say plainly that the window, the client map reading and the waypoint button are not built yet.
 
 ### Added
