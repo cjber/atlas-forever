@@ -14,6 +14,7 @@ Locales\enUS.lua
 Core\SafeCall.lua
 Core\Model.lua
 Core\Core.lua
+Core\Instances.lua
 Core\API.lua
 UI\SettingsPage.lua
 UI\Window.lua

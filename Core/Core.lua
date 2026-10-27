@@ -41,6 +41,7 @@ local function load()
 		end
 	end
 	ns.db = db
+	ns.Instances = ns.BuildInstances()
 	ns.ready = true
 end
 
