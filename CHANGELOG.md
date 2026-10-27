@@ -5,9 +5,11 @@ All notable changes to Atlas Forever are documented here. The format is based on
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-27
+
 ### Fixed
 
-- **The standalone browser now populates its instance list from `C_Map`** when saved variables load, instead of leaving `ns.Instances` unset.
+- **The standalone browser now populates its instance list from `C_Map`** when saved variables load, instead of leaving `ns.Instances` unset. `Core/Instances.lua` walks the client's dungeon map hierarchy once the saved variables load, names each instance's continent from its parent map, and the API reports ready from that point, so the window lists every dungeon the client knows instead of an empty pane.
 
 ## [0.1.0] - 2026-10-26
 
