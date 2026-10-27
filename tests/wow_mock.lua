@@ -508,7 +508,10 @@ function Mock.Harness(opts)
 			return Mock.inRaid
 		end,
 		LE_PARTY_CATEGORY_INSTANCE = 1,
-		Enum = { SendAddonMessageResult = { Success = 0, AddonMessageThrottle = 3, ChannelThrottle = 8 } },
+		Enum = {
+			SendAddonMessageResult = { Success = 0, AddonMessageThrottle = 3, ChannelThrottle = 8 },
+			UIMapType = { Dungeon = 4 },
+		},
 		C_ChatInfo = {
 			RegisterAddonMessagePrefix = function(prefix)
 				Mock.registeredPrefix = prefix

@@ -9,11 +9,11 @@ The instance index for WoW: Forever: every dungeon and raid the client knows, it
 <a href="https://ko-fi.com/cjber59408"><img src="https://img.shields.io/badge/Ko--fi-tip-ff5e5b?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
 </p>
 
-Atlas Forever opens an instance browser with a searchable list, a map view, floor choices when the client provides them, and account-wide bookmarks. The waypoint control appears when entrance coordinates are available.
+Atlas Forever opens an instance browser with a searchable list, a map view, floor choices when the client provides them, and account-wide bookmarks. It builds the list from the client's map hierarchy when the addon loads. The waypoint control appears when entrance coordinates are available.
 
 <p align="center"><img src="docs/screenshots/window.png" alt="Atlas Forever instance browser mock" width="800"></p>
 
-The mock uses Blizzard's window art, font and instance names. This client build has no instance map art in its `UiMap` data, so the empty map area is shown plainly.
+The mock uses Blizzard's window art, font and client map names. This client build has no instance map art in its `UiMap` data, so the empty map area is shown plainly.
 
 ## What is here
 

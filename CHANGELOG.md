@@ -5,6 +5,10 @@ All notable changes to Atlas Forever are documented here. The format is based on
 
 ## [Unreleased]
 
+### Fixed
+
+- **The standalone browser now populates its instance list from `C_Map`** when saved variables load, instead of leaving `ns.Instances` unset.
+
 ## [0.1.0] - 2026-10-26
 
 ### Added
