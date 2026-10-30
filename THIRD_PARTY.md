@@ -9,6 +9,7 @@
 
 ## Ideas and contributors
 
-| Source | Contribution |
-|---|---|
-| Blizzard's WoW client | Map APIs and the client UI conventions Atlas Forever extends. |
+Credit for the ideas and reports behind the addon. No report or idea from a player has shaped Atlas Forever yet; the first is credited here, by the handle it
+was posted under. The client's map APIs it reads are listed under Inputs.
+
+Thanks also to everyone else who reported a bug or asked for a feature, here or on CurseForge.

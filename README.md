@@ -66,7 +66,7 @@ python3 tools/screenshots.py
 
 ## Credits
 
-Made by cjber. Blizzard Entertainment for the game and its map data. The WoW: Forever project for the client it is written for.
+Made by cjber. Blizzard Entertainment for the game and its map data. The WoW: Forever project for the client it is written for. Thanks to everyone who reports a bug or asks for a feature, here or on CurseForge. [THIRD_PARTY.md](THIRD_PARTY.md) lists every input and the full credits.
 
 World of Warcraft is a trademark of Blizzard Entertainment, Inc. This addon is not affiliated with or endorsed by Blizzard Entertainment.
 
